@@ -109,7 +109,7 @@ public class Cell {
      */
     public String toString()
     {
-        return String.format("");
+        return String.format("the position is (%f, %f),and the color is %s",rx,ry,color.toString());
     }
 
 
