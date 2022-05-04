@@ -241,12 +241,9 @@ public class main {
         StdDraw.clear();
         for(int i = 0; i < cells.length;i++)
         {
-            cells[i].move();
-            StdDraw.pause(1000);
             cells[i].draw(scale);
         }
         StdDraw.show();
-        StdDraw.pause(1000);
     }
 
 }
