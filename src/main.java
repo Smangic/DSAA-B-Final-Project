@@ -133,22 +133,71 @@ public class main {
 
     public static void changeColor(Cell cell)
     {
-        //TODO: 根据4个count来变化颜色
+        //根据4个count来变化颜色
+        if(cell.color==Color.RED){
+            if(cell.Rcount>=3 && (double)cell.Rcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)>0.7)
+                cell.color = Color.GREEN;
+            else if(cell.Ycount>=1 && (double)cell.Ycount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)<0.1)
+                cell.color = Color.YELLOW;
+            //else cell.color = Color.BLUE;
+        }
+        else if(cell.color==Color.GREEN){
+            if(cell.Gcount>=3 && (double)cell.Gcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)>0.7)
+                cell.color = Color.BLUE;
+            else if(cell.Rcount>=1 && (double)cell.Rcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)<0.1)
+                cell.color = Color.RED;
+            //else cell.color = Color.YELLOW;
+        }
+        else if(cell.color==Color.BLUE){
+            if(cell.Bcount>=3 && (double)cell.Bcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)>0.7)
+                cell.color = Color.YELLOW;
+            else if(cell.Gcount>=1 && (double)cell.Gcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)<0.1)
+                cell.color = Color.GREEN;
+            //else cell.color = Color.RED;
+        }
+        else {
+            if(cell.Ycount>=3 && (double)cell.Ycount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)>0.7)
+                cell.color = Color.BLUE;
+            else if(cell.Gcount>=1 && (double)cell.Gcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)<0.1)
+                cell.color = Color.GREEN;
+            //else cell.color = Color.RED;
+        }
     }
 
     private static void scanCells( Cell[] cells)
     {
-        for(int i = 0; i < cells.length;i++){
-            for(int j = 0; j < cells.length;j++)
+        for(int i = 0; i < cells.length;i++){//当前cell
+            //清零之前的数据
+            cells[i].Rcount=0;
+            cells[i].Gcount=0;
+            cells[i].Bcount=0;
+            cells[i].Ycount=0;
+            for(int j = 0; j < cells.length;j++)//遍历所有cell
             {
-                //TODO: 判断距离，不满足就continue
-                if(cells[j].color==Color.RED)
-                    cells[i].Rcount++;
-                //还有3个剩的
+                //判断cells[j]是否在cells[i]的范围内
+                if(cells[i].rx-cells[i].perceptionRange <= cells[j].rx && cells[j].rx<=cells[i].rx+cells[i].perceptionRange
+                        && cells[i].ry-cells[i].perceptionRange <= cells[j].ry && cells[j].ry<=cells[i].ry+cells[i].perceptionRange){
+                    //记录周围cell[i]颜色数量
+                    if(cells[j].color==Color.RED)
+                        cells[i].Rcount++;
+                    else if(cells[j].color==Color.GREEN)
+                        cells[i].Gcount++;
+                    else if(cells[j].color==Color.BLUE)
+                        cells[i].Bcount++;
+                    else
+                        cells[i].Ycount++;
+                }
+                //不满足就continue
             }
+            //减去自己
             if(cells[i].color==Color.RED)
                 cells[i].Rcount --;
-            //还有3个剩的
+            else if(cells[i].color==Color.GREEN)
+                cells[i].Gcount --;
+            else if(cells[i].color==Color.BLUE)
+                cells[i].Bcount --;
+            else
+                cells[i].Ycount --;
         }
     }
 
