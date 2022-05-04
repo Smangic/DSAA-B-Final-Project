@@ -1,3 +1,5 @@
+package src;
+
 import edu.princeton.cs.algs4.StdDraw;
 
 import java.awt.*;
@@ -83,7 +85,7 @@ public class Cell {
      */
     public String toString()
     {
-        return String.format("the position is (%f, %f),and the color is %s",rx,ry,color.toString());
+        return String.format("the position is (%f, %f),and the color is %s",rx,ry,color);
     }
 
     public void move()

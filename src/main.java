@@ -1,22 +1,53 @@
+package src;
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.awt.*;
 
 public class main {
     public static void main(String[] args) {
-        Cell c1 = new Cell(0.5,1.5,0.5,6.1,"r");
-        Cell c2 = new Cell(1.1,0.5,0.3, 5,"g");
-        Cell c3 = new Cell(1.8,1,0.1,4,"b");
-        Cell c4 = new Cell(1.8,2,0.6,6,"y");
-        //Cell c5 = new Cell(1.8,2,0.6,6,"q");//检验能否识别非法颜色。
-        Cell[] cells = {c1,c2,c3,c4};
-        while (true) {
-            for (int i = 0; i < cells.length; i++) {
-                //越简洁越好
-            }
-            scanCells(cells);
-            changeAllColor(cells);
+        
+        StdOut.print("Please input the width and height: ");
+        int[] canvas = new int[2];
+        int cellNum = 0;
+        /*
+         * 获取标准输入
+         */
+        canvas[0] =  StdIn.readInt();
+        canvas[1] = StdIn.readInt();
+        StdOut.print("Please input the number of cells:");
+        cellNum = StdIn.readInt();
+        Cell[] cells = new Cell[cellNum];
+        for(int i = 0; i <cellNum;i++)
+        {
+            StdOut.printf("Please input the information of the %dth cell",i);
+            double rx = StdIn.readDouble();
+            double ry = StdIn.readDouble();
+            double radius = StdIn.readDouble();
+            double perceptionRange = StdIn.readDouble();
+            String color = StdIn.readString();
+            cells[i] = new Cell(rx,ry,radius,perceptionRange,color);
         }
+        StdOut.println(canvas[0]+canvas[1]);
+        
+        for(int i = 0; i < cellNum ; i++){
+            StdOut.println(cells[i].toString());
+        }
+
+        // Cell c1 = new Cell(0.5,1.5,0.5,6.1,"r");
+        // Cell c2 = new Cell(1.1,0.5,0.3, 5,"g");
+        // Cell c3 = new Cell(1.8,1,0.1,4,"b");
+        // Cell c4 = new Cell(1.8,2,0.6,6,"y");
+        //Cell c5 = new Cell(1.8,2,0.6,6,"q");//检验能否识别非法颜色。
+        //Cell[] cells = {c1,c2,c3,c4};
+        // while (true) {
+        //     for (int i = 0; i < cells.length; i++) {
+        //         //越简洁越好
+        //     }
+        //     scanCells(cells);
+        //     changeAllColor(cells);
+        // }
 
 
 //        StdDraw.setCanvasSize(500,500);
@@ -32,6 +63,11 @@ public class main {
 //            //update(cells);
 //            redraw(cells,scale);
 //        }
+    }
+
+    private static void readData()
+    {
+
     }
 
     private static void update(Cell[] cells)
@@ -50,7 +86,7 @@ public class main {
      */
     private static double calMinDistance(Cell cell, Cell[] crashCells)
     {
-
+        return 0;
     }
 
     /**
@@ -113,7 +149,7 @@ public class main {
 
     public static void changeColor(Cell cell)
     {
-        //TODO:根据4个count来变化颜色
+        //TODO: 根据4个count来变化颜色
     }
 
     private static void scanCells( Cell[] cells)
@@ -124,9 +160,11 @@ public class main {
                 //TODO: 判断距离，不满足就continue
                 if(cells[j].color==Color.RED)
                     cells[i].Rcount++;
+                //还有3个剩的
             }
             if(cells[i].color==Color.RED)
                 cells[i].Rcount --;
+            //还有3个剩的
         }
     }
 
