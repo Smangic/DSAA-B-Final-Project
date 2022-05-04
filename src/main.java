@@ -1,4 +1,4 @@
-package src;
+
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -8,20 +8,20 @@ import java.awt.*;
 public class main {
     public static void main(String[] args) {
         
-        StdOut.print("Please input the width and height: ");
-        int[] canvas = new int[2];
-        int cellNum = 0;
-        /*
+        //StdOut.print("Please input the width and height: ");
+        int xlim,ylim;
+        int cellNum; //细胞的数量
+        /**
          * 获取标准输入
          */
-        canvas[0] =  StdIn.readInt();
-        canvas[1] = StdIn.readInt();
-        StdOut.print("Please input the number of cells:");
+        xlim =  StdIn.readInt();
+        ylim = StdIn.readInt();
+        //StdOut.print("Please input the number of cells:");
         cellNum = StdIn.readInt();
         Cell[] cells = new Cell[cellNum];
         for(int i = 0; i <cellNum;i++)
         {
-            StdOut.printf("Please input the information of the %dth cell",i);
+            //StdOut.printf("Please input the information of the %dth cell",i);
             double rx = StdIn.readDouble();
             double ry = StdIn.readDouble();
             double radius = StdIn.readDouble();
@@ -29,18 +29,6 @@ public class main {
             String color = StdIn.readString();
             cells[i] = new Cell(rx,ry,radius,perceptionRange,color);
         }
-        StdOut.println(canvas[0]+canvas[1]);
-        
-        for(int i = 0; i < cellNum ; i++){
-            StdOut.println(cells[i].toString());
-        }
-
-        // Cell c1 = new Cell(0.5,1.5,0.5,6.1,"r");
-        // Cell c2 = new Cell(1.1,0.5,0.3, 5,"g");
-        // Cell c3 = new Cell(1.8,1,0.1,4,"b");
-        // Cell c4 = new Cell(1.8,2,0.6,6,"y");
-        //Cell c5 = new Cell(1.8,2,0.6,6,"q");//检验能否识别非法颜色。
-        //Cell[] cells = {c1,c2,c3,c4};
         // while (true) {
         //     for (int i = 0; i < cells.length; i++) {
         //         //越简洁越好
@@ -49,25 +37,21 @@ public class main {
         //     changeAllColor(cells);
         // }
 
+        int scale = 10;
+        StdDraw.setCanvasSize(xlim*scale,ylim*scale);
+        StdDraw.setXscale(0,xlim*scale);
+        StdDraw.setYscale(0,ylim*scale);
 
-//        StdDraw.setCanvasSize(500,500);
-//        StdDraw.setXscale(0,500);
-//        StdDraw.setYscale(0,500);
-//        int scale = 100;
-////        c1.draw(scale);
-////        c2.draw(scale);
-////        c3.draw(scale);
-////        c4.draw(scale);
+        for(int i = 0; i < cellNum;i++)
+        {
+            cells[i].draw(scale);
+        }
+
 //        for(int i = 0; i < 100; i++)
 //        {
 //            //update(cells);
 //            redraw(cells,scale);
 //        }
-    }
-
-    private static void readData()
-    {
-
     }
 
     private static void update(Cell[] cells)
