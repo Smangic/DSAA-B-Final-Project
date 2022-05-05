@@ -11,9 +11,9 @@ import edu.princeton.cs.algs4.StdRandom;
 public class GenTest {
     public static void main(String[] args) {
         String[] colors = {"r","g","b","y"};
-        int num = 10; //*需要生成的数据量
-        double ratio = 0.6; //*生成cell占全空间的比例
-        Out out = new Out(String.format("TestData_%d_%f",num,ratio));
+        int num = 10000; //*需要生成的数据量
+        double ratio = 0.7; //*生成cell占全空间的比例
+        Out out = new Out(String.format("TestData_%d_%.2f.txt",num,ratio));
 
         //*分别用来储存合理的x,y,r
         double[] xs = new double [num];
@@ -21,19 +21,19 @@ public class GenTest {
         double[] rs = new double [num];
         int i = 0;
         int xMax = StdRandom.uniform(100, 190); //*就随机啦
-        int yMax = StdRandom.uniform(80, 110);
+        int yMax = StdRandom.uniform(80, 100);
         
         int area = xMax*yMax;
         double Rarea = ratio * area;
-        double expectation = Math.sqrt(Rarea/num);
-        double sigma = (Math.min(xMax, yMax) - expectation)/5;
+        double expectation = Math.sqrt(Rarea/num)/2;
+        double sigma = expectation / 2; //标准差越小细胞大小差距不会那么夸张
 
         out.println(xMax+" "+yMax);
         out.println(num);
         while(i < num)
         {
-            double rxTemp = StdRandom.gaussian(xMax/2,xMax/8); //*就是说有4sigma的概率落在范围内
-            double ryTemp = StdRandom.gaussian(yMax/2,yMax/8);
+            double rxTemp = StdRandom.uniform(expectation,xMax-expectation); //坐标可能还是均匀分布比较好
+            double ryTemp = StdRandom.uniform(expectation,yMax-expectation);
             double radiusTemp = Math.abs(StdRandom.gaussian(expectation,sigma));//尽可能均匀一点吧
 
             if(i==0 && rxTemp >=radiusTemp && ryTemp >= radiusTemp && (rxTemp+radiusTemp) <=xMax && (ryTemp+radiusTemp) <= yMax)
@@ -65,12 +65,12 @@ public class GenTest {
         out.close();
     }
 
-    //校验发现没有重叠就返回true
+    //校验发现没有重叠，没有越界就返回true
     private static boolean testData(double[] xs,double[] ys,double[] rs,int j,double rxTemp,double ryTemp, double radiusTemp,int xMax,int yMax)
     {
         for(int i = 0; i < j;i++)
         {
-            if(calDistance(xs[i],ys[i],rs[i],rxTemp,ryTemp,radiusTemp) < 0 || rxTemp <radiusTemp || ryTemp < radiusTemp ||(rxTemp+radiusTemp) >xMax || (ryTemp+radiusTemp) > yMax)
+            if(calDistance(xs[i],ys[i],rs[i],rxTemp,ryTemp,radiusTemp) < 0 || rxTemp <radiusTemp || ryTemp < radiusTemp ||(rxTemp+radiusTemp) >xMax || (ryTemp+radiusTemp) > yMax || radiusTemp < 0.1)
                 return false;
         }
         return true;
