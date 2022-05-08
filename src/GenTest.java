@@ -11,8 +11,8 @@ import edu.princeton.cs.algs4.StdRandom;
 public class GenTest {
     public static void main(String[] args) {
         String[] colors = {"r","g","b","y"};
-        int num = 10000; //*需要生成的数据量
-        double ratio = 0.7; //*生成cell占全空间的比例
+        int num = 20; //*需要生成的数据量
+        double ratio = 0.5; //*生成cell占全空间的比例
         Out out = new Out(String.format("TestData_%d_%.2f.txt",num,ratio));
 
         //*分别用来储存合理的x,y,r
@@ -22,7 +22,7 @@ public class GenTest {
         int i = 0;
         int xMax = StdRandom.uniform(100, 190); //*就随机啦
         int yMax = StdRandom.uniform(80, 100);
-        
+
         int area = xMax*yMax;
         double Rarea = ratio * area;
         double expectation = Math.sqrt(Rarea/num)/2;
@@ -61,7 +61,10 @@ public class GenTest {
                 }
             }
         }
-        //out.println("the first test");
+        out.println("3");
+        out.println("4   2");
+        out.println("10  0");
+        out.println("14  1");
         out.close();
     }
 
@@ -83,3 +86,4 @@ public class GenTest {
         return Math.sqrt(x*x + y*y)-r1-r2;
     }
 }
+

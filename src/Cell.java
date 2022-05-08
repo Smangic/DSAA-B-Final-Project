@@ -83,6 +83,12 @@ public class Cell {
         //可以考虑现在这里把感知范围的框框画出来，最后删掉就好。
     }
 
+    public void clear(int scale)
+    {
+        StdDraw.setPenColor(Color.WHITE);
+        StdDraw.filledCircle(rx*scale,ry*scale,radius*scale);
+    }
+
     public void drawSelected(int scale)
     {
         StdDraw.setPenColor(Color.BLACK);
@@ -96,15 +102,13 @@ public class Cell {
      */
     public String toString()
     {
-        return String.format("the position is (%.2f, %.2f),and the color is %s",rx,ry,color);
+        String thatColor;
+        if(this.color.equals(Color.BLUE)) thatColor = "b";
+        else if(this.color.equals(Color.RED)) thatColor = "r";
+        else if(this.color.equals(Color.YELLOW)) thatColor = "y";
+        else thatColor = "g";
+        return String.format("%f %f %s",rx,ry,thatColor);
     }
-
-    public void move()
-    {
-        rx += vx;
-        ry += vy;
-    }
-
     //可以考虑key为 cell的id，value为 cell 的 hashmap
 
 

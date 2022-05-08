@@ -84,8 +84,6 @@ public class QuadTree {
             return found;
         return query(range,found);
 
-
-
     }
 
     public ArrayList<Cell> query(Circle range)
