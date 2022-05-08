@@ -10,6 +10,18 @@ public class QuadTree {
     boolean isDivided = false;
 
 
+    // 在构造树的时候就吧所有的细胞恰进去
+    public QuadTree(Rectangle boundary, int capacity,Cell[] cells)
+    {
+        this.boundary = boundary;
+        this.capacity = capacity;
+        for(int i = 0; i < cells.length; i++)
+        {
+            this.insert(cells[i]);
+        }
+
+    }
+
     public QuadTree(Rectangle boundary, int capacity)
     {
         this.boundary = boundary;
@@ -42,6 +54,7 @@ public class QuadTree {
         if(this.cells.size() < this.capacity)
         {
             this.cells.add(cell);
+            cell.location = this;
             return true;
         }
         else
@@ -138,10 +151,16 @@ public class QuadTree {
         return found;
     }
 
-//    public Cell delete(Cell cell)
-//    {
-//
-//    }
+    //TODO: 我想实现，删除一个指定的细胞，然后修复四叉树的功能,，这样可以避免每一次都要重新构造树
+    public Cell delete(Cell cell)
+    {
+        //首先消除亲子关系
+        this.cells.remove(cell);
+        cell.location = null;
+
+
+        return cell;
+    }
 
     public void show(int scale)
     {

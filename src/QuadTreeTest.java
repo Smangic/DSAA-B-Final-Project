@@ -35,15 +35,16 @@ public class QuadTreeTest {
         StdDraw.setYscale(0,ylim*scale);
 
         Rectangle boundary = new Rectangle(xlim/2,ylim/2,xlim/2,ylim/2);
-        QuadTree quadTree = new QuadTree(boundary,4);
+       // QuadTree quadTree = new QuadTree(boundary,4);
 
         //test the insert function.
-        for(int i = 0; i < cellNum; i++)
-        {
-            if(quadTree.insert(cells[i]))
-                total++;
-
-        }
+//        for(int i = 0; i < cellNum; i++)
+//        {
+//            if(quadTree.insert(cells[i]))
+//                total++;
+//
+//        }
+        QuadTree quadTree = new QuadTree(boundary,4,cells);
         StdOut.println(total);
         quadTree.show(scale);
 
@@ -53,20 +54,29 @@ public class QuadTreeTest {
 //        range.draw(scale);
 //        ArrayList<Cell> found = new ArrayList<>();
 //        found = quadTree.query(range);
+//        StdOut.println(found.size());
+//        StdOut.println(quadTree.totalSearch);
+////
+//        for(int i = 0; i < found.size();i++)
+//        {
+//            found.get(i).drawSelected(scale);
+//        }
 
         Circle circleRange = new Circle(xlim/2,ylim/2,ylim/6);
 
         circleRange.draw(scale);
         ArrayList<Cell> cfound = new ArrayList<>();
         cfound = quadTree.query(circleRange);
-
         StdOut.println(cfound.size());
         StdOut.println(quadTree.totalSearch);
-
+//
         for(int i = 0; i < cfound.size();i++)
         {
             cfound.get(i).drawSelected(scale);
         }
+
+
+
 
     }
 }

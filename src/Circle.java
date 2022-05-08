@@ -15,7 +15,7 @@ public class Circle {
     public boolean contains(Cell cell) {
 
         double d = Math.sqrt((cell.rx - x)*(cell.rx - x) + (cell.ry - y)*(cell.ry - y));
-        return d <= (radius + cell.radius);
+        return d <= radius;
     }
 
     public boolean intersects(Rectangle range)

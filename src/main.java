@@ -4,21 +4,26 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class main {
-    public static void main(String[] args) {
-        
-        //StdOut.print("Please input the width and height: ");
-        int xlim,ylim;
-        int cellNum; //细胞的数量
-        /**
-         * 获取标准输入
-         */
+    int xlim,ylim,cellNum;
+
+    int scale; // 画图的扩张倍数
+
+
+
+
+    public void readInput()
+    {
         xlim =  StdIn.readInt();
         ylim = StdIn.readInt();
         //StdOut.print("Please input the number of cells:");
         cellNum = StdIn.readInt();
         Cell[] cells = new Cell[cellNum];
+
+        //HashMap<Integer,Cell> cellHashMap = new HashMap<Integer,Cell>();
+
         for(int i = 0; i <cellNum;i++)
         {
             //StdOut.printf("Please input the information of the %dth cell",i);
@@ -29,35 +34,71 @@ public class main {
             String color = StdIn.readString();
             cells[i] = new Cell(rx,ry,radius,perceptionRange,color);
             cells[i].setID(i);
+            //cellHashMap.put(i,cells[i]);
         }
+    }
+
+
+
+
+    public static void main(String[] args) {
+        
+        //StdOut.print("Please input the width and height: ");
+        int xlim,ylim;
+        int cellNum; //细胞的数量
         int scale = 10;
+        /**
+         * 获取标准输入
+         */
+        xlim =  StdIn.readInt();
+        ylim = StdIn.readInt();
+        //StdOut.print("Please input the number of cells:");
+        cellNum = StdIn.readInt();
+        Cell[] cells = new Cell[cellNum];
+
+        //HashMap<Integer,Cell> cellHashMap = new HashMap<Integer,Cell>();
+
+        for(int i = 0; i <cellNum;i++)
+        {
+            //StdOut.printf("Please input the information of the %dth cell",i);
+            double rx = StdIn.readDouble();
+            double ry = StdIn.readDouble();
+            double radius = StdIn.readDouble();
+            double perceptionRange = StdIn.readDouble();
+            String color = StdIn.readString();
+            cells[i] = new Cell(rx,ry,radius,perceptionRange,color);
+            cells[i].setID(i);
+            //cellHashMap.put(i,cells[i]);
+        }
+
+        int quaryNum = StdIn.readInt();
+        int[] ids = new int[quaryNum];
+        int[] times = new int[quaryNum];
+        for(int i = 0; i < quaryNum ;i++)
+        {
+            ids[i] = StdIn.readInt();
+            times[i] = StdIn.readInt();
+        }
+
         //StdDraw.enableDoubleBuffering();
-        StdDraw.setCanvasSize(xlim*scale,ylim*scale);
-        StdDraw.setXscale(0,xlim*scale);
-        StdDraw.setYscale(0,ylim*scale);
 
-
-
-        for(int i = 0; i < cellNum;i++)
+        int seconds = 10;
+        for(int i = 0; i< seconds;i++)
         {
-            cells[i].draw(scale);
-        }
-        StdDraw.disableDoubleBuffering();
+            for(int j = 0; j < 15; j++)
+            {
+                moveAllcell(cells);
 
-//        for(int i = 0; i < 100; i++)
-//        {
-//            //update(cells);
-//            redraw(cells,scale);
-//        }
+                changeAllColor(cells);
+            }
+        }
     }
 
-    private static void update(Cell[] cells)
+    public static void moveAllcell(Cell[] cells)
     {
-        for(int i = 0; i < cells.length;i++)
-        {
 
-        }
     }
+
 
     /**
      * 通过修改速度，
