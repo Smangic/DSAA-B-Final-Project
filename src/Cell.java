@@ -1,6 +1,7 @@
 
 
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.awt.*;
 import java.util.InputMismatchException;
@@ -75,9 +76,18 @@ public class Cell {
     {
         StdDraw.setPenColor(this.color);
         StdDraw.filledCircle(rx*scale,ry*scale,radius*scale);
-
+        StdDraw.setPenColor(Color.BLACK);
+        //StdDraw.text(rx*scale,ry*scale,String.format("%d",this.ID));
+        StdDraw.filledCircle(rx*scale,ry*scale,3);
         //可以考虑现在这里把感知范围的框框画出来，最后删掉就好。
     }
+
+    public void drawSelected(int scale)
+    {
+        StdDraw.setPenColor(Color.BLACK);
+        StdDraw.filledCircle(rx*scale,ry*scale,radius*scale);
+    }
+
 
     /**
      * 用于打印命令行输出

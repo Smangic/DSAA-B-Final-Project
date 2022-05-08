@@ -28,24 +28,21 @@ public class main {
             double perceptionRange = StdIn.readDouble();
             String color = StdIn.readString();
             cells[i] = new Cell(rx,ry,radius,perceptionRange,color);
+            cells[i].setID(i);
         }
-        // while (true) {
-        //     for (int i = 0; i < cells.length; i++) {
-        //         //越简洁越好
-        //     }
-        //     scanCells(cells);
-        //     changeAllColor(cells);
-        // }
-
         int scale = 10;
+        //StdDraw.enableDoubleBuffering();
         StdDraw.setCanvasSize(xlim*scale,ylim*scale);
         StdDraw.setXscale(0,xlim*scale);
         StdDraw.setYscale(0,ylim*scale);
+
+
 
         for(int i = 0; i < cellNum;i++)
         {
             cells[i].draw(scale);
         }
+        StdDraw.disableDoubleBuffering();
 
 //        for(int i = 0; i < 100; i++)
 //        {
