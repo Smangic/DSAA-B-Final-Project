@@ -5,6 +5,8 @@ import edu.princeton.cs.algs4.StdOut;
 import java.util.ArrayList;
 
 public class QuadTreeTest {
+
+
     public static void main(String[] args) {
         //StdOut.print("Please input the width and height: ");
         int xlim,ylim;
@@ -33,7 +35,7 @@ public class QuadTreeTest {
         StdDraw.setCanvasSize(xlim*scale,ylim*scale);
         StdDraw.setXscale(0,xlim*scale);
         StdDraw.setYscale(0,ylim*scale);
-
+        StdDraw.enableDoubleBuffering();
         Rectangle boundary = new Rectangle(xlim/2,ylim/2,xlim/2,ylim/2);
        // QuadTree quadTree = new QuadTree(boundary,4);
 
@@ -74,6 +76,7 @@ public class QuadTreeTest {
         {
             cfound.get(i).drawSelected(scale);
         }
+        StdDraw.show();
 
 
 

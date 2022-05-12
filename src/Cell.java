@@ -46,18 +46,36 @@ public class Cell {
         this.ry = ry;
         this.radius = radius;
         this.perceptionRange = perceptionRange;
-        if(color.equals("b"))
+        //this.ID ++;
+        if(color.equals("b")||color.equals("BLUE"))
             this.color = Color.BLUE;
-        else if(color.equals("g"))
+        else if(color.equals("g")||color.equals("GREEN"))
             this.color = Color.GREEN;
-        else if(color.equals("r"))
+        else if(color.equals("r")||color.equals("RED"))
             this.color = Color.RED;
-        else if(color.equals("y"))
+        else if(color.equals("y")||color.equals("YELLOW"))
             this.color = Color.YELLOW;
         else{
             throw new InputMismatchException("no such color exception");
         }
     }
+    public Cell(double rx, double ry, double radius, Color color,int id)
+    {
+        this.rx = rx;
+        this.ry = ry;
+        this.radius = radius;
+       this.color = color;
+       this.ID = id;
+    }
+
+    public Cell(double rx, double ry, Color color)
+    {
+        this.rx = rx;
+        this.ry = ry;
+        this.color = color;
+    }
+
+
 
     /**设置ID，因为标准输入没有传入ID，我们需要自己设定ID
      * @param id 建议从0开始标通号
@@ -77,9 +95,9 @@ public class Cell {
     {
         StdDraw.setPenColor(this.color);
         StdDraw.filledCircle(rx*scale,ry*scale,radius*scale);
-        StdDraw.setPenColor(Color.BLACK);
+        //StdDraw.setPenColor(Color.BLACK);
         //StdDraw.text(rx*scale,ry*scale,String.format("%d",this.ID));
-        StdDraw.filledCircle(rx*scale,ry*scale,3);
+        //StdDraw.filledCircle(rx*scale,ry*scale,3);
         //可以考虑现在这里把感知范围的框框画出来，最后删掉就好。
     }
 
@@ -107,7 +125,7 @@ public class Cell {
         else if(this.color.equals(Color.RED)) thatColor = "r";
         else if(this.color.equals(Color.YELLOW)) thatColor = "y";
         else thatColor = "g";
-        return String.format("%f %f %s",rx,ry,thatColor);
+        return String.format("%.1f %.1f %s",rx,ry,thatColor);
     }
     //可以考虑key为 cell的id，value为 cell 的 hashmap
 

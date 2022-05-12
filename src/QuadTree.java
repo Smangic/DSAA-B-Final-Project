@@ -92,12 +92,9 @@ public class QuadTree {
         if (!range.intersects(this.boundary))
             return found;
         return query(range,found);
-
-
-
     }
 
-    static int totalSearch = 0;
+    public static int totalSearch = 0;
     private ArrayList<Cell> query(Rectangle range, ArrayList found)
     {
         if (!range.intersects(this.boundary))
@@ -111,7 +108,6 @@ public class QuadTree {
                         found.add(cell); //找到了就添进去
                 }
             }
-
             if(this.isDivided)
             {
                 this.TopLeft.query(range,found);

@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.StdDraw;
 
+import java.awt.*;
+
 public class Circle {
     double x,y,radius;
 
@@ -13,9 +15,9 @@ public class Circle {
 
 
     public boolean contains(Cell cell) {
-
         double d = Math.sqrt((cell.rx - x)*(cell.rx - x) + (cell.ry - y)*(cell.ry - y));
-        return d <= radius;
+        //return d <= radius;
+        return d <= radius+cell.radius;//相切
     }
 
     public boolean intersects(Rectangle range)
@@ -37,6 +39,7 @@ public class Circle {
 
     public void draw(int scale)
     {
+        StdDraw.setPenColor(Color.GREEN);
         StdDraw.circle(x*scale,y*scale,radius*scale);
     }
 }

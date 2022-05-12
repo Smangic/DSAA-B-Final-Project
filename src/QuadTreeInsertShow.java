@@ -2,9 +2,8 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
-public class QuadTreeShow {
+public class QuadTreeInsertShow {
     public static void main(String[] args) {
 
         int scale = 10;

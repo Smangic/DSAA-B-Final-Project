@@ -11,8 +11,8 @@ import edu.princeton.cs.algs4.StdRandom;
 public class GenTest {
     public static void main(String[] args) {
         String[] colors = {"r","g","b","y"};
-        int num = 20; //*需要生成的数据量
-        double ratio = 0.5; //*生成cell占全空间的比例
+        int num = 2000; //*需要生成的数据量
+        double ratio = 0.4; //*生成cell占全空间的比例
         Out out = new Out(String.format("TestData_%d_%.2f.txt",num,ratio));
 
         //*分别用来储存合理的x,y,r
