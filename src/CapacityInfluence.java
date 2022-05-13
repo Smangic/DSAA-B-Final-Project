@@ -127,7 +127,7 @@ public class CapacityInfluence {
     {
         for(int i = 0; i < seconds; i++)
         {//i表示循环的秒数，第i秒就在
-            StdOut.println("在前"+ i+ "秒一共遍历了"+quadTree.totalSearch+"个细胞，当前用时 ："+ stopwatch.elapsedTime()+"s");
+            StdOut.println("在前"+ i+ "秒一共遍历了"+i*cellNum*cellNum+"个细胞，当前用时 ："+ stopwatch.elapsedTime()+"s");
             for(int j = 0; j < 15; j++)
             {
                 scanBrute();
@@ -140,7 +140,7 @@ public class CapacityInfluence {
         CapacityInfluence cI = new CapacityInfluence();
         cI.readInput();
         Stopwatch timer = new Stopwatch();
-        cI.loop_Brute(timer);
+        cI.loop(timer);
     }
 
 }

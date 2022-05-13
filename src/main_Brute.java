@@ -309,9 +309,10 @@ public class main_Brute {
         int k = 0;
         for(int i = 0; i < seconds; i++)
         {//i表示循环的秒数，第i秒就在
+            double t1 = stopwatch.elapsedTime();
             for(int j = 0; j < 15; j++)
             {
-                double t1 = stopwatch.elapsedTime();
+
                 while(k <quaryNum && (i + (double)j/15) <= times[k]&& times[k] <(i+(j+1.0)/15))
                 {
                     result[k] = new Cell (cells[ids[k]].rx,cells[ids[k]].ry,cells[ids[k]].color);
@@ -319,19 +320,20 @@ public class main_Brute {
                 }
 
                 //StdDraw.pause(1000/15);
+                double t0 = stopwatch.elapsedTime();
                 moveAllCells();
+                double t2 = stopwatch.elapsedTime();
+                StdOut.println("移动细胞用时："+(t2 - t0));
                 StdDraw.clear();
                 drawAllCells();
 
                 changeAllColor();
+                double t3 = stopwatch.elapsedTime();
+                StdOut.println("改变颜色用时："+(t3-t2));
                 drawAllCells();
                 StdDraw.clear();
-
-                //StdDraw.pause(100);
-                StdOut.println("当前帧数 ："+ 15/(stopwatch.elapsedTime()-t1));
-
-
             }
+            StdOut.println("当前帧数 ："+ 15/(stopwatch.elapsedTime()-t1));
         }
     }
 

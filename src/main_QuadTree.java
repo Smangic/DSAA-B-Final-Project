@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Timer;
 
 public class main_QuadTree {
     int xlim,ylim,cellNum;  //x y 轴的取值范围； 细胞的数量
@@ -13,7 +14,7 @@ public class main_QuadTree {
     int[] ids;
     double[] times; //存储查询细胞的id 以及 对应的秒数
     Cell[] cells; //存储所有细胞
-    double maxRadius;//最大半径
+    double maxRadius=0;//最大半径
 
     double seconds; //循环的时间
 
@@ -25,7 +26,7 @@ public class main_QuadTree {
     Rectangle boundary ;
     QuadTree quadTree ;
 
-    private static double steplen = 1.0;
+    private static double steplen = 1.0/15;
 
 
 
@@ -44,14 +45,11 @@ public class main_QuadTree {
             double rx = StdIn.readDouble();
             double ry = StdIn.readDouble();
             double radius = StdIn.readDouble();
+            if(radius > maxRadius) maxRadius = radius;
             double perceptionRange = StdIn.readDouble();
             String color = StdIn.readString();
             cells[i] = new Cell(rx,ry,radius,perceptionRange,color);
             cells[i].setID(i);
-        }
-        //获取最大半径
-        for(int i=0;i<cells.length;i++){
-            if(cells[i].radius>maxRadius) maxRadius = cells[i].radius;
         }
 
         boundary = new Rectangle(xlim/2.0,ylim/2.0,xlim/2.0,ylim/2.0);
@@ -73,9 +71,10 @@ public class main_QuadTree {
     /**
      * 改变颜色完善这里
      */
-    private void changeAllColor() {
+    private void changeAllColor(Stopwatch timer) {
 
         for (int i = 0; i < cells.length; i++) {
+            double t0 = timer.elapsedTime();
             //清零之前的数据
             cells[i].Rcount=0;
             cells[i].Gcount=0;
@@ -85,8 +84,12 @@ public class main_QuadTree {
             Rectangle rectangle = new Rectangle(cells[i].rx, cells[i].ry,cells[i].perceptionRange+maxRadius,cells[i].perceptionRange+maxRadius);
             //Circle circle = new Circle(cells[i].rx, cells[i].ry,cells[i].perceptionRange);
             //得到周围细胞
-            ArrayList<Cell> found = new ArrayList<Cell>();
-            found = quadTree.query(rectangle);//可能在范围里的cell
+            ArrayList<Cell> found = quadTree.query(rectangle);//可能在范围里的cell
+            double t1 = timer.elapsedTime();
+            //StdOut.println("查询细胞用时： "+(t1-t0));
+
+            //周围小于4个细胞一定不会变色
+            if(found.size() < 4) continue;
 
             for (int j = 0; j < found.size(); j++) {
                 if(isInRange(cells[i],found.get(j))){//在范围里
@@ -108,6 +111,10 @@ public class main_QuadTree {
                 cells[i].Bcount--;
             else
                 cells[i].Ycount--;
+            double t2 = timer.elapsedTime();
+            //StdOut.println("确定三个count"+ (t2-t1));
+
+
         }
         //color change
         for (int i = 0; i < cells.length; i++) {
@@ -117,27 +124,12 @@ public class main_QuadTree {
 
     }
     private boolean isInRange(Cell c1,Cell c2){//c2是否在c1范围里，是则 return true
-//        if(Math.abs(c1.rx-c2.rx) <= c1.perceptionRange && Math.abs(c1.ry-c2.ry) <= c1.perceptionRange+c2.radius)
-//            return true;
-//        else if(pointToPoint(c2.rx,c2.ry,c1.rx-c1.perceptionRange,c1.ry+c1.perceptionRange) <= c2.radius
-//                || pointToPoint(c2.rx,c2.ry,c1.rx-c1.perceptionRange,c1.ry-c1.perceptionRange) <= c2.radius
-//                || pointToPoint(c2.rx,c2.ry,c1.rx+c1.perceptionRange,c1.ry+c1.perceptionRange) <= c2.radius
-//                || pointToPoint(c2.rx,c2.ry,c1.rx+c1.perceptionRange,c1.ry-c1.perceptionRange) <= c2.radius)
-//            return true;
-//
-//        return false;
-//
         double x = Math.abs(c1.rx-c2.rx)-c1.perceptionRange;
         double y = Math.abs(c1.ry-c2.ry)-c1.perceptionRange;
         x = x<0 ? 0:x;
         y = y<0 ? 0:y;
         return x*x + y*y <= c2.radius*c2.radius;
 
-    }
-    private static double pointToPoint(double x1, double y1, double x2, double y2) {
-        double lineLength = 0;
-        lineLength = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-        return lineLength;
     }
 
     private void changeColor(Cell cell)
@@ -323,16 +315,10 @@ public class main_QuadTree {
         int k = 0;
         for(int i = 0; i < seconds; i++)
         {//i表示循环的秒数，第i秒就在
-//            for(int k  = 0; k < quaryNum; k++)
-//            {//如果查询名单中有第i秒时的某个细胞，则。。。
-//                if(times[k]==i){
-//                    result[k] = cells[ids[k]];
-//                }
-//            }
-
+            double t1 = stopwatch.elapsedTime();
             for(int j = 0; j < 15; j++)
             {
-                double t1 = stopwatch.elapsedTime();
+
                 while(k <quaryNum && (i + (double)j/15) <= times[k]&& times[k] < i+(j+1.0)/15)
                 {
                     result[k] = new Cell(cells[ids[k]].rx,cells[ids[k]].ry,cells[ids[k]].color);
@@ -340,18 +326,24 @@ public class main_QuadTree {
                 }
 
                 //StdDraw.pause(1000/15);
+                double t0 = stopwatch.elapsedTime();
                 moveAllCells();
+                double t2 = stopwatch.elapsedTime();
+                StdOut.println("移动细胞用时："+(t2 - t0));
                 StdDraw.clear();
-                drawAllCells();
+                //drawAllCells();
 
-                changeAllColor();
+                changeAllColor(stopwatch);
+                double t3 = stopwatch.elapsedTime();
+                StdOut.println("改变颜色用时："+(t3-t2));
                 drawAllCells();
-                StdDraw.clear();
+                //StdDraw.clear();
 
                 //StdDraw.pause(1000);
-                StdOut.println("当前帧数 ："+ 15/(stopwatch.elapsedTime()-t1));
+
 
             }
+            StdOut.println("当前帧数 ："+ 15/(stopwatch.elapsedTime()-t1));
         }
     }
 
