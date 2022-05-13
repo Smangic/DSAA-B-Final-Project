@@ -1,7 +1,4 @@
-import edu.princeton.cs.algs4.StdDraw;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -307,20 +304,14 @@ public class main_Brute {
     }
 
     //循环跟新位置和颜色
-    private void loop()
+    private void loop(Stopwatch stopwatch)
     {
         int k = 0;
         for(int i = 0; i < seconds; i++)
         {//i表示循环的秒数，第i秒就在
-//            for(int k  = 0; k < quaryNum; k++)
-//            {//如果查询名单中有第i秒时的某个细胞，则。。。
-//                if(times[k]==i){
-//                    result[k] = cells[ids[k]];
-//                }
-//            }
-
             for(int j = 0; j < 15; j++)
             {
+                double t1 = stopwatch.elapsedTime();
                 while(k <quaryNum && (i + (double)j/15) <= times[k]&& times[k] <(i+(j+1.0)/15))
                 {
                     result[k] = new Cell (cells[ids[k]].rx,cells[ids[k]].ry,cells[ids[k]].color);
@@ -337,6 +328,7 @@ public class main_Brute {
                 StdDraw.clear();
 
                 //StdDraw.pause(100);
+                StdOut.println("当前帧数 ："+ 15/(stopwatch.elapsedTime()-t1));
 
 
             }
@@ -360,7 +352,9 @@ public class main_Brute {
         main_Brute brute = new main_Brute();
         brute.readInput();
         brute.setCanvas();
-        brute.loop();
+        Stopwatch timer = new Stopwatch();
+
+        brute.loop(timer);
         brute.printResult();
     }
 

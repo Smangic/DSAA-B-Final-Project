@@ -50,7 +50,7 @@ public class GenTest {
             else
             {
                 //后面的都需要和前面的所有校验后才可以加进去
-                if(testData(xs,ys,rs,i,rxTemp,ryTemp,radiusTemp,xMax,yMax)){
+                if(noOverLapping(xs,ys,rs,i,rxTemp,ryTemp,radiusTemp,xMax,yMax)){
                     double percepTemp = StdRandom.uniform(radiusTemp,Math.min(xMax, yMax));
                     String color = colors[StdRandom.uniform(4)];
                     xs[i] = rxTemp;
@@ -69,7 +69,7 @@ public class GenTest {
     }
 
     //校验发现没有重叠，没有越界就返回true
-    private static boolean testData(double[] xs,double[] ys,double[] rs,int j,double rxTemp,double ryTemp, double radiusTemp,int xMax,int yMax)
+    private static boolean noOverLapping(double[] xs,double[] ys,double[] rs,int j,double rxTemp,double ryTemp, double radiusTemp,int xMax,int yMax)
     {
         for(int i = 0; i < j;i++)
         {

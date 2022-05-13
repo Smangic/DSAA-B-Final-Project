@@ -19,7 +19,6 @@ public class Cell {
     int Bcount = 0;
     int Ycount = 0;
     double rx,ry; //x坐标，y坐标
-    double vx = 0.1,vy = 0; //x方向速度，y方向速度
     double radius; //半径
     double perceptionRange; //感知范围，以细胞为中心，2p为边长的正方形。
     Color color; //这个Color 来自于java.awt
