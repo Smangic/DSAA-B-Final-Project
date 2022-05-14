@@ -50,7 +50,7 @@ public class CapacityInfluence {
         }
 
         boundary = new Rectangle(xlim/2.0,ylim/2.0,xlim/2.0,ylim/2.0);
-        quadTree = new QuadTree(boundary,4,cells);
+        quadTree = new QuadTree(boundary,5,cells);
         quaryNum = StdIn.readInt();
         ids = new int[quaryNum];
         times = new double[quaryNum];
@@ -115,7 +115,7 @@ public class CapacityInfluence {
     {
         for(int i = 0; i < seconds; i++)
         {//i表示循环的秒数，第i秒就在
-            StdOut.println("在前"+ i+ "秒一共遍历了"+quadTree.totalSearch+"个细胞，当前用时 ："+ stopwatch.elapsedTime()+"s");
+            StdOut.print(quadTree.totalSearch+" ");
             for(int j = 0; j < 15; j++)
             {
                 scanAllCells();
@@ -127,7 +127,7 @@ public class CapacityInfluence {
     {
         for(int i = 0; i < seconds; i++)
         {//i表示循环的秒数，第i秒就在
-            StdOut.println("在前"+ i+ "秒一共遍历了"+i*cellNum*cellNum+"个细胞，当前用时 ："+ stopwatch.elapsedTime()+"s");
+            StdOut.print(i*cellNum*cellNum+ " ");
             for(int j = 0; j < 15; j++)
             {
                 scanBrute();

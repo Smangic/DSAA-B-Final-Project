@@ -8,7 +8,7 @@ import java.util.Timer;
 
 public class main_QuadTree {
     int xlim,ylim,cellNum;  //x y 轴的取值范围； 细胞的数量
-    int scale = 1; // 画图的扩张倍数
+    double scale = 0.2; // 画图的扩张倍数
 
     int quaryNum; //查询细胞的数量
     int[] ids;
@@ -39,6 +39,8 @@ public class main_QuadTree {
         ylim = StdIn.readInt();
         cellNum = StdIn.readInt();
         cells = new Cell[cellNum];
+        double size = xlim *ylim;
+        scale = Math.sqrt(240000/size);
 
         for(int i = 0; i <cellNum;i++)
         {
@@ -303,7 +305,7 @@ public class main_QuadTree {
      */
     private void setCanvas()
     {
-        StdDraw.setCanvasSize(xlim*scale,ylim*scale);
+        StdDraw.setCanvasSize((int)(xlim*scale),(int)(ylim*scale));
         StdDraw.setXscale(0,xlim*scale);
         StdDraw.setYscale(0,ylim*scale);
         StdDraw.enableDoubleBuffering();
@@ -330,14 +332,16 @@ public class main_QuadTree {
                 moveAllCells();
                 double t2 = stopwatch.elapsedTime();
                 StdOut.println("移动细胞用时："+(t2 - t0));
-                StdDraw.clear();
-                //drawAllCells();
+                //StdDraw.clear();
+                drawAllCells();
 
                 changeAllColor(stopwatch);
                 double t3 = stopwatch.elapsedTime();
                 StdOut.println("改变颜色用时："+(t3-t2));
-                drawAllCells();
-                //StdDraw.clear();
+//                drawAllCells();
+//                double t4 = stopwatch.elapsedTime();
+//                StdOut.println("画图用时："+(t4-t3));
+                StdDraw.clear();
 
                 //StdDraw.pause(1000);
 

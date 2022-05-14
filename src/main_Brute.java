@@ -11,7 +11,7 @@ public class main_Brute {
     static int xlim;
     static int ylim;
     int cellNum;  //x y 轴的取值范围； 细胞的数量
-    int scale = 1; // 画图的扩张倍数
+    double scale = 0.1; // 画图的扩张倍数
 
     int quaryNum; //查询细胞的数量
     int[] ids;
@@ -35,6 +35,8 @@ public class main_Brute {
         ylim = StdIn.readInt();
         cellNum = StdIn.readInt();
         cells = new Cell[cellNum];
+        double size = xlim *ylim;
+        scale = Math.sqrt(240000/size);
 
 
 
@@ -297,7 +299,7 @@ public class main_Brute {
      */
     private void setCanvas()
     {
-        StdDraw.setCanvasSize(xlim*scale,ylim*scale);
+        StdDraw.setCanvasSize((int)(xlim*scale),(int)(ylim*scale));
         StdDraw.setXscale(0,xlim*scale);
         StdDraw.setYscale(0,ylim*scale);
         StdDraw.enableDoubleBuffering();
@@ -320,18 +322,19 @@ public class main_Brute {
                 }
 
                 //StdDraw.pause(1000/15);
-                double t0 = stopwatch.elapsedTime();
+                //double t0 = stopwatch.elapsedTime();
                 moveAllCells();
-                double t2 = stopwatch.elapsedTime();
-                StdOut.println("移动细胞用时："+(t2 - t0));
-                StdDraw.clear();
+                //double t2 = stopwatch.elapsedTime();
+                //StdOut.println("移动细胞用时："+(t2 - t0));
+               // StdDraw.clear();
                 drawAllCells();
 
                 changeAllColor();
-                double t3 = stopwatch.elapsedTime();
-                StdOut.println("改变颜色用时："+(t3-t2));
-                drawAllCells();
+                //double t3 = stopwatch.elapsedTime();
+                //StdOut.println("改变颜色用时："+(t3-t2));
+                //drawAllCells();
                 StdDraw.clear();
+
             }
             StdOut.println("当前帧数 ："+ 15/(stopwatch.elapsedTime()-t1));
         }

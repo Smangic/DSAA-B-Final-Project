@@ -90,7 +90,7 @@ public class Cell {
     /**
      * 绘制细胞啦，这里感觉直接画也有点诡异，传入参数太小了，应该有个scale会好一点
      */
-    public void draw(int scale)
+    public void draw(double scale)
     {
         StdDraw.setPenColor(this.color);
         StdDraw.filledCircle(rx*scale,ry*scale,radius*scale);

@@ -11,8 +11,8 @@ import edu.princeton.cs.algs4.StdRandom;
 public class GenTest {
     public static void main(String[] args) {
         String[] colors = {"r","g","b","y"};
-        int num = 2000; //*需要生成的数据量
-        double ratio = 0.4; //*生成cell占全空间的比例
+        int num = 20000; //*需要生成的数据量
+        double ratio = 0.2; //*生成cell占全空间的比例
         Out out = new Out(String.format("TestData_%d_%.2f.txt",num,ratio));
 
         //*分别用来储存合理的x,y,r
@@ -20,6 +20,7 @@ public class GenTest {
         double[] ys = new double [num];
         double[] rs = new double [num];
         int i = 0;
+
         int xMax = StdRandom.uniform(100, 190); //*就随机啦
         int yMax = StdRandom.uniform(80, 100);
 
@@ -51,7 +52,7 @@ public class GenTest {
             {
                 //后面的都需要和前面的所有校验后才可以加进去
                 if(noOverLapping(xs,ys,rs,i,rxTemp,ryTemp,radiusTemp,xMax,yMax)){
-                    double percepTemp = StdRandom.uniform(radiusTemp,Math.min(xMax, yMax));
+                    double percepTemp = StdRandom.uniform(radiusTemp,3*radiusTemp);
                     String color = colors[StdRandom.uniform(4)];
                     xs[i] = rxTemp;
                     ys[i] = ryTemp;
@@ -61,10 +62,10 @@ public class GenTest {
                 }
             }
         }
-        out.println("3");
-        out.println("4   2");
-        out.println("10  0");
-        out.println("14  1");
+//        out.println("3");
+//        out.println("4   2");
+//        out.println("10  0");
+//        out.println("14  1");
         out.close();
     }
 
