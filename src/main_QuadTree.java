@@ -161,7 +161,7 @@ public class main_QuadTree {
         else {
             if(cell.Ycount>=3 && (double)cell.Ycount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)>0.7)
                 cell.color = Color.RED;
-            else if(cell.Gcount>=1 && (double)cell.Gcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)<0.1)
+            else if(cell.Bcount>=1 && (double)cell.Bcount/(cell.Rcount+cell.Gcount+cell.Bcount+cell.Ycount)<0.1)
                 cell.color = Color.BLUE;
             //else cell.color = Color.RED;
         }
@@ -333,7 +333,7 @@ public class main_QuadTree {
                 double t2 = stopwatch.elapsedTime();
                 StdOut.println("移动细胞用时："+(t2 - t0));
                 //StdDraw.clear();
-                drawAllCells();
+                //drawAllCells();
 
                 changeAllColor(stopwatch);
                 double t3 = stopwatch.elapsedTime();
@@ -341,7 +341,7 @@ public class main_QuadTree {
 //                drawAllCells();
 //                double t4 = stopwatch.elapsedTime();
 //                StdOut.println("画图用时："+(t4-t3));
-                StdDraw.clear();
+                //StdDraw.clear();
 
                 //StdDraw.pause(1000);
 
@@ -369,7 +369,7 @@ public class main_QuadTree {
         main_QuadTree Main_quadTree = new main_QuadTree();
 
         Main_quadTree.readInput();
-        Main_quadTree.setCanvas();
+        //Main_quadTree.setCanvas();
         Stopwatch timer = new Stopwatch();
         Main_quadTree.loop(timer);
         Main_quadTree.printResult();

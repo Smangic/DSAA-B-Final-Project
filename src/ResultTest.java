@@ -48,8 +48,10 @@ public class ResultTest {
         }
         StdOut.println("颜色匹配：" + right);
         StdOut.println("累计的x坐标（绝对值）误差: "+error_x);
+        StdOut.println("x坐标的误差的最大值为： "+ StdStats.max(error_xs));
         StdOut.println("x坐标的误差的均值为： "+ StdStats.mean(error_xs) + "标准差为： "+StdStats.stddev(error_xs));
         StdOut.println("累积的y坐标（绝对值）误差: "+error_y);
+        StdOut.println("y坐标的误差的最大值为： "+ StdStats.max(error_ys));
         StdOut.println("y坐标的误差的均值为： "+StdStats.mean(error_ys) + "标准差为： "+StdStats.stddev(error_ys));
 
     }

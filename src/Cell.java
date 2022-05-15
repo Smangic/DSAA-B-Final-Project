@@ -121,7 +121,7 @@ public class Cell {
         else if(this.color.equals(Color.RED)) thatColor = "r";
         else if(this.color.equals(Color.YELLOW)) thatColor = "y";
         else thatColor = "g";
-        return String.format("%.1f %.1f %s",rx,ry,thatColor);
+        return String.format("%.3f %.3f %s",rx,ry,thatColor);
     }
     //可以考虑key为 cell的id，value为 cell 的 hashmap
 

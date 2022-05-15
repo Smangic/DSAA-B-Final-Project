@@ -156,6 +156,8 @@ private ArrayList<Cell> query(Rectangle range, ArrayList found)
 
 
 
+
+
 ==我觉得主要通过运行时间来确定，可以print 10个外层循环所需的时间，如果小于等于10秒就满足要求，可以再自己生成数据找到临界10s的细胞数==
 
 ## 校验
@@ -194,7 +196,7 @@ double radiusTemp = Math.abs(StdRandom.gaussian(expectation,sigma));//尽可能�
 
 if(noOverLapping(xs,ys,rs,i,rxTemp,ryTemp,radiusTemp,xMax,yMax)) //xs[i] ys[i] rs[i]分别存储第i个细胞的x坐标 y坐标 半径 
 {
-    double percepTemp = StdRandom.uniform(radiusTemp,Math.min(xMax, yMax)); //感知范围比较放飞自我，毕竟未知结果也很难debug
+    double percepTemp = StdRandom.uniform(radiusTemp,3*radiusTemp); //感知范围设置在1至3倍半径
     String color = colors[StdRandom.uniform(4)];  // String[] colors = {"r","g","b","y"};
     xs[i] = rxTemp;
     ys[i] = ryTemp;
@@ -227,8 +229,10 @@ for(int i = 0; i < 500; i++)
 }
 StdOut.println("颜色匹配：" + right);
 StdOut.println("累计的x坐标（绝对值）误差: "+error_x);
+StdOut.println("x坐标的误差的最大值为： "+ StdStats.max(error_xs));
 StdOut.println("x坐标的误差的均值为： "+ StdStats.mean(error_xs) + "标准差为： "+StdStats.stddev(error_xs));
 StdOut.println("累积的y坐标（绝对值）误差: "+error_y);
+StdOut.println("y坐标的误差的最大值为： "+ StdStats.max(error_ys));
 StdOut.println("y坐标的误差的均值为： "+StdStats.mean(error_ys) + "标准差为： "+StdStats.stddev(error_ys));
 ```
 
@@ -238,13 +242,13 @@ StdOut.println("y坐标的误差的均值为： "+StdStats.mean(error_ys) + "标
 
 其中暴力算法`sample3`的结果如下：
 
-![image-20220512183838438](Report.assets/image-20220512183838438.png)
+![image-20220514103222995](Report.assets/image-20220514103222995.png)
 
-颜色全部匹配，平均每个细胞的坐标差值在0.02左右，小于最大的单步步长$\frac{1}{15}(0.067)$可以将误差视为计算机的浮点误差，结果非常理想。
+颜色全部匹配，由于我们只输出了三位小数，标准差和最大误差均在10^-4^这个数量级，可以将误差视为计算机的浮点误差，结果非常理想。
 
 使用四叉树的`sample3`的结果如下：
 
-![image-20220513185310768](Report.assets/image-20220513185310768.png)
+![image-20220514103236733](Report.assets/image-20220514103236733.png)
 
 因为没有更改主要逻辑，只是优化了查找的范围，所以结果和我们使用暴力算法的相同，符合预期。
 
