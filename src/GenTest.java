@@ -21,8 +21,8 @@ public class GenTest {
         double[] rs = new double [num];
         int i = 0;
 
-        int xMax = StdRandom.uniform(100, 190); //*就随机啦
-        int yMax = StdRandom.uniform(80, 100);
+        int xMax = StdRandom.uniform(1000, 1900); //*就随机啦
+        int yMax = StdRandom.uniform(800, 1000);
 
         int area = xMax*yMax;
         double Rarea = ratio * area;

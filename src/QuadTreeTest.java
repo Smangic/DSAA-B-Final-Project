@@ -52,30 +52,30 @@ public class QuadTreeTest {
 
 
         //test the query function.
-//        Rectangle range = new Rectangle(xlim/4,ylim/4,xlim/10,ylim/10);
-//        range.draw(scale);
-//        ArrayList<Cell> found = new ArrayList<>();
-//        found = quadTree.query(range);
-//        StdOut.println(found.size());
-//        StdOut.println(quadTree.totalSearch);
-////
-//        for(int i = 0; i < found.size();i++)
-//        {
-//            found.get(i).drawSelected(scale);
-//        }
-
-        Circle circleRange = new Circle(xlim/2,ylim/2,ylim/6);
-
-        circleRange.draw(scale);
-        ArrayList<Cell> cfound = new ArrayList<>();
-        cfound = quadTree.query(circleRange);
-        StdOut.println(cfound.size());
+        Rectangle range = new Rectangle(xlim/4,ylim/4,xlim/10,ylim/10);
+        range.draw(scale);
+        ArrayList<Cell> found = new ArrayList<>();
+        found = quadTree.query(range);
+        StdOut.println(found.size());
         StdOut.println(quadTree.totalSearch);
 //
-        for(int i = 0; i < cfound.size();i++)
+        for(int i = 0; i < found.size();i++)
         {
-            cfound.get(i).drawSelected(scale);
+            found.get(i).drawSelected(scale);
         }
+
+//        Circle circleRange = new Circle(xlim/2,ylim/2,ylim/6);
+//
+//        circleRange.draw(scale);
+//        ArrayList<Cell> cfound = new ArrayList<>();
+//        cfound = quadTree.query(circleRange);
+//        StdOut.println(cfound.size());
+//        StdOut.println(quadTree.totalSearch);
+////
+//        for(int i = 0; i < cfound.size();i++)
+//        {
+//            cfound.get(i).drawSelected(scale);
+//        }
         StdDraw.show();
 
 
